@@ -21,13 +21,15 @@ public class StudentController {
 
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/add",consumes = "application/json",produces = "application/json")
-    public String studentadd(@RequestBody Students s){
+    public HashMap<String,String> studentadd(@RequestBody Students s){
         System.out.println(s.getName().toString());
         System.out.println(s.getAdmno());
         System.out.println(s.getRollno());
         System.out.println(s.getCollege());;
         dao.save(s);
-        return "student add successfully";
+        HashMap<String,String>map=new HashMap<>();
+        map.put("status","success");
+        return map;
     }
 
     @CrossOrigin(origins = "*")
