@@ -5,6 +5,7 @@ import com.example.studentappnew_backend.model.Students;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -36,6 +37,17 @@ public class StudentController {
         System.out.println(rollno);
         dao.searchStudents(s.getRollno());
         return(List<Students>) dao.searchStudents(s.getRollno());
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/delete",consumes = "application/json",produces = "application/json")
+    public HashMap<String,String> delete(@RequestBody Students d){
+        String id=String.valueOf(d.getId());
+        System.out.println(id);
+        dao.deleteStudents(d.getId());
+        HashMap<String,String>map=new HashMap<>();
+        map.put("status","success");
+        return map;
     }
 
 }
